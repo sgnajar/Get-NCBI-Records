@@ -1,4 +1,3 @@
-## import functiona
 from Bio import Entrez, SeqIO
 from ftplib import FTP
 import ftplib
@@ -12,7 +11,7 @@ import time
 print time.strftime('%X %x %Z')
 
 Entrez.tool = "September19"
-Entrez.email = "snajar@uncc.edu"
+Entrez.email = "snajar@uncc.edu" #sasangnajar@gmail.com
 
 ftpSite = "ftp.ncbi.nih.gov"
 ftp = ftplib.FTP(ftpSite)
@@ -27,7 +26,7 @@ dirFilenames = ftp.nlst()
 # print dirFilenames
 def sortingMethod(x):
 	return(x[-11:])
-sortedDirFilenames = sorted(dirFilenames, key = sortingMethod)  
+sortedDirFilenames = sorted(dirFilenames, key = sortingMethod)
 
 def getAnnotation():
 	with gzip.open(localPath+eachFile, mode='rb', compresslevel=9) as myWorkingFile:
@@ -117,7 +116,7 @@ def getAnnotation():
 					"Ggenes": str(Ggenes),
 				}}
 				)
-	
+
 	# r'gbbct.*\.seq.gz$'
 
 for eachFile in sortedDirFilenames:
@@ -133,7 +132,7 @@ for eachFile in sortedDirFilenames:
 				print "file not exist, downloading...\ncase 2:", eachFile, "downloaded."
 				ftp.retrbinary('RETR ' + eachFile, open(localPath+eachFile, 'wb').write)
 				getAnnotation()
-				 
+
 		else:
 			localPath = "/Users/snajar/Documents/pyworkspace/nuccoreFolder/bacteria/"
 			if os.path.isfile(localPath+eachFile):
@@ -146,5 +145,5 @@ for eachFile in sortedDirFilenames:
 				getAnnotation()
 
 
-	# print "1. Sleeping Mode... "
-	# time.sleep(60)
+	# print "Sleeping Mode... "
+	# time.sleep(10)
